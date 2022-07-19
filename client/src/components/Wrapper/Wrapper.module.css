@@ -1,0 +1,6 @@
+.main {
+  height: 85vh;
+  overflow-y: scroll;
+  width: 100%;
+  padding: 5vh 5vw;
+}

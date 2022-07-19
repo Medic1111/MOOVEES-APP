@@ -1,0 +1,22 @@
+.img {
+  width: 90vw;
+  height: 75vh;
+  position: absolute;
+}
+.div {
+  position: relative;
+  z-index: 100;
+  top: 10vh;
+  max-width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(1, 18, 20, 0.55);
+}
+.h3 {
+  width: 70%;
+  font-size: 7em;
+  color: #f7f7f7;
+  text-align: center;
+}

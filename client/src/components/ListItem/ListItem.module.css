@@ -1,0 +1,45 @@
+.li {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0.25em;
+  justify-content: space-between;
+}
+.btnBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  gap: 2%;
+}
+
+.pTitle {
+  font-size: 1.7em;
+  text-align: center;
+  min-height: 5vh;
+}
+.pYear {
+  font-size: 1.3em;
+  text-align: center;
+}
+.btn {
+  height: 49%;
+  width: 100%;
+  border: transparent;
+  background-color: #f7f7f71f;
+  color: #f7f7f7;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #f7f7f753;
+  transition: 0.2s;
+}
+img {
+  height: 75%;
+}
+.stars {
+  text-align: center;
+  font-size: 2em;
+}

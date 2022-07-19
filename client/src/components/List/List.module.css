@@ -1,0 +1,19 @@
+.ul {
+  width: auto;
+  height: 65vh;
+  overflow-x: scroll;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+}
+.h2 {
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 5em;
+  letter-spacing: 4px;
+  color: #f7f7f759;
+}
