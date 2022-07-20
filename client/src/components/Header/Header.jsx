@@ -7,6 +7,7 @@ const Header = () => {
 
   const logOutHandler = () => {
     uiCtxMgr.setShowLogin(false);
+    uiCtxMgr.setIsLoggedIn(false);
   };
   const logInHandler = () => {
     uiCtxMgr.setShowLogin(true);
