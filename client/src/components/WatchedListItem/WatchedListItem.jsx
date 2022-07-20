@@ -1,13 +1,16 @@
 import classes from "../ListItem/ListItem.module.css";
 import { useState } from "react";
 import Stars from "../Stars/Stars";
+import { useContext } from "react";
+import { listsCtx } from "../../store/lists-ctx";
 
-const WatchedListItem = ({ obj, setWatched, watched }) => {
+const WatchedListItem = ({ obj }) => {
   const [rate, setRate] = useState(["☆", "☆", "☆", "☆", "☆"]);
+  const listCtxMgr = useContext(listsCtx);
 
   const removeFromWatchedHandler = () => {
-    setWatched(() => {
-      return watched.filter((objRet) => {
+    listCtxMgr.setWatched(() => {
+      return listCtxMgr.watched.filter((objRet) => {
         return objRet !== obj;
       });
     });

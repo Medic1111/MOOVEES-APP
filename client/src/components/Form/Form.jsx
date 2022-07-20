@@ -1,8 +1,11 @@
 import classes from "./Form.module.css";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { listsCtx } from "../../store/lists-ctx";
 
-const Form = ({ setData }) => {
+const Form = () => {
+  const listCtxMgr = useContext(listsCtx);
+
   const [userInput, setUserInput] = useState("");
   const [error, setError] = useState(false);
   const [serverError, setServerError] = useState(false);
@@ -13,7 +16,7 @@ const Form = ({ setData }) => {
       .then((serverRes) => {
         setError(false);
         setServerError(false);
-        setData(serverRes.data);
+        listCtxMgr.setData(serverRes.data);
       })
       .catch((err) => {
         err.response.status === 404 && setError(true);

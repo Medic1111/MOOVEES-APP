@@ -1,12 +1,16 @@
 import classes from "./ListItem.module.css";
+import { useContext } from "react";
+import { listsCtx } from "../../store/lists-ctx";
 
 const ListItem = ({ obj, setWatched, setWish }) => {
+  const listCtxMgr = useContext(listsCtx);
+
   const addToWatchedHandler = () => {
-    setWatched((prev) => [...prev, obj]);
+    listCtxMgr.setWatched((prev) => [...prev, obj]);
   };
 
   const addToWishHandler = () => {
-    setWish((prev) => [...prev, obj]);
+    listCtxMgr.setWish((prev) => [...prev, obj]);
   };
 
   return (

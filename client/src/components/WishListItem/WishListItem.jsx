@@ -1,18 +1,22 @@
 import classes from "../ListItem/ListItem.module.css";
+import { listsCtx } from "../../store/lists-ctx";
+import { useContext } from "react";
 
-const ListItem = ({ obj, setWatched, setWish, wish }) => {
+const ListItem = ({ obj }) => {
+  const listCtxMgr = useContext(listsCtx);
+
   const addToWatchedHandler = () => {
-    setWatched((prev) => [...prev, obj]);
-    setWish(() => {
-      return wish.filter((objRet) => {
+    listCtxMgr.setWatched((prev) => [...prev, obj]);
+    listCtxMgr.setWish(() => {
+      return listCtxMgr.wish.filter((objRet) => {
         return objRet !== obj;
       });
     });
   };
 
   const removeFromWatchedHandler = () => {
-    setWish(() => {
-      return wish.filter((objRet) => {
+    listCtxMgr.setWish(() => {
+      return listCtxMgr.wish.filter((objRet) => {
         return objRet !== obj;
       });
     });

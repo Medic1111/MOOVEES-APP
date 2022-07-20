@@ -1,22 +1,18 @@
 import classes from "../List/List.module.css";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import WishListItem from "../WishListItem/WishListItem";
-const WishList = ({ wish, setWatched, setWish }) => {
+import { listsCtx } from "../../store/lists-ctx";
+
+const WishList = () => {
+  const listCtxMgr = useContext(listsCtx);
+
   return (
     <React.Fragment>
       <h2 className={classes.h2}>WISHLIST:</h2>
       <ul className={classes.ul}>
-        {wish.map((obj, index) => {
+        {listCtxMgr.wish.map((obj, index) => {
           if (obj.Poster !== "N/A") {
-            return (
-              <WishListItem
-                key={`WISH_${index}`}
-                obj={obj}
-                setWatched={setWatched}
-                setWish={setWish}
-                wish={wish}
-              />
-            );
+            return <WishListItem key={`WISH_${index}`} obj={obj} />;
           }
         })}
       </ul>
