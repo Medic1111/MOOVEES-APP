@@ -17,3 +17,11 @@
   letter-spacing: 4px;
   color: #f7f7f759;
 }
+@media (max-width: 798px) {
+  .ul {
+    width: 100vw;
+  }
+  .h2 {
+    font-size: 4em;
+  }
+}

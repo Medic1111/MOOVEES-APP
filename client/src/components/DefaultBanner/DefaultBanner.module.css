@@ -19,4 +19,10 @@
   font-size: 7em;
   color: #f7f7f7;
   text-align: center;
+  letter-spacing: 4px;
+}
+@media (max-width: 798px) {
+  .h3 {
+    font-size: 6em;
+  }
 }

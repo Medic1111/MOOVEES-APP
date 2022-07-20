@@ -40,3 +40,9 @@ body::before {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: none;
 }
+
+@media (max-width: 798px) {
+  html {
+    font-size: 55.5%;
+  }
+}

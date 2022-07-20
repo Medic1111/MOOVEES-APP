@@ -4,6 +4,7 @@
   height: 100%;
   gap: 0.25em;
   justify-content: space-between;
+  align-items: center;
 }
 .btnBox {
   display: flex;
@@ -12,16 +13,19 @@
   align-items: center;
   height: 10%;
   gap: 2%;
+  width: 100%;
 }
 
 .pTitle {
   font-size: 1.7em;
   text-align: center;
   min-height: 5vh;
+  color: #f7f7f7d4;
 }
 .pYear {
   font-size: 1.3em;
   text-align: center;
+  color: #f7f7f7d4;
 }
 .btn {
   height: 49%;
@@ -42,4 +46,11 @@ img {
 .stars {
   text-align: center;
   font-size: 2em;
+}
+@media (max-width: 798px) {
+  .pTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

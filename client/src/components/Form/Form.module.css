@@ -33,3 +33,12 @@
 .submit:hover {
   background-color: rgba(28, 168, 183, 0.846);
 }
+
+@media (max-width: 798px) {
+  .input {
+    width: 75%;
+  }
+  .submit {
+    width: 25%;
+  }
+}
