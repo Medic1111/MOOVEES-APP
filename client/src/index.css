@@ -16,6 +16,7 @@ body {
   width: inherit;
   background-color: rgb(1, 18, 20);
   color: #f7f7f7;
+  position: relative;
 }
 body::before {
   content: "";

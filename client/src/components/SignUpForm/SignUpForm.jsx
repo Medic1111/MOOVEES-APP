@@ -23,6 +23,15 @@ const SignUpForm = () => {
     e.preventDefault();
     console.log(userInput);
     // AXIOS CALL API
+    axios
+      .post("/api/register", userInput)
+      .then((serverRes) => {
+        console.log(serverRes.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     uiCtxMgr.setIsLoggedIn(true);
 
     setUserInput({

@@ -3,10 +3,26 @@ import { useState } from "react";
 import Stars from "../Stars/Stars";
 import { useContext } from "react";
 import { listsCtx } from "../../store/lists-ctx";
+import { detailCtx } from "../../store/detail-ctx";
+import { uiCtx } from "../../store/ui-ctx";
+import axios from "axios";
 
 const WatchedListItem = ({ obj }) => {
   const [rate, setRate] = useState(["☆", "☆", "☆", "☆", "☆"]);
   const listCtxMgr = useContext(listsCtx);
+  const detailCtxMgr = useContext(detailCtx);
+  const uiCtxMgr = useContext(uiCtx);
+
+  const detailHandler = async () => {
+    let id = obj.imdbID;
+    await axios
+      .get(`/api/movie/${id}`)
+      .then((serverRes) => {
+        detailCtxMgr.setDetailInfo(serverRes.data);
+        uiCtxMgr.setShowModal(true);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const removeFromWatchedHandler = () => {
     listCtxMgr.setWatched(() => {
@@ -20,7 +36,7 @@ const WatchedListItem = ({ obj }) => {
     <li className={classes.li}>
       <p className={classes.pTitle}>{obj.Title}</p>
       <p className={classes.pYear}>{obj.Year}</p>
-      <img src={obj.Poster} />
+      <img onClick={detailHandler} src={obj.Poster} />
       <div className={classes.btnBox}>
         <p className={classes.stars}>
           {rate.map((item, index) => {

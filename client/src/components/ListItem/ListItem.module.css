@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 10%;
+  min-height: 13%;
   gap: 2%;
   width: 100%;
 }
@@ -41,7 +41,9 @@
   transition: 0.2s;
 }
 img {
-  height: 75%;
+  min-height: 75%;
+  max-height: 75%;
+  cursor: pointer;
 }
 .stars {
   text-align: center;

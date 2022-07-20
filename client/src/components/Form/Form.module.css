@@ -32,6 +32,7 @@
 }
 .submit:hover {
   background-color: rgba(28, 168, 183, 0.846);
+  transition: 0.25s;
 }
 
 @media (max-width: 798px) {
