@@ -1,8 +1,12 @@
 import classes from "../Credentials/Credentials.module.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { uiCtx } from "../../store/ui-ctx";
+
 import axios from "axios";
 
 const LoginForm = () => {
+  const uiCtxMgr = useContext(uiCtx);
+
   const [userLogin, setUserLogin] = useState({
     username: "",
     password: "",
@@ -19,6 +23,7 @@ const LoginForm = () => {
     e.preventDefault();
     console.log(userLogin);
     // AXIOS CALL API
+    uiCtxMgr.setIsLoggedIn(true);
     setUserLogin({
       username: "",
       password: "",
