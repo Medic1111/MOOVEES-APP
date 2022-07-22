@@ -107,7 +107,7 @@ app.patch("/api/:id/wishlist/watched/:movie", (req, res) => {
       return obj.imdbID !== req.params.movie;
     });
 
-    await doc[0].watched.push(movieToPush);
+    await doc[0].watched.push(movieToPush[0]);
 
     await doc[0].save((err, succ) =>
       err
