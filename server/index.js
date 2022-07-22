@@ -99,9 +99,9 @@ app.patch("/api/:id/watched/remove/:movie", (req, res) => {
 // MOVE TO WATCHED
 app.patch("/api/:id/wishlist/watched/:movie", (req, res) => {
   User.find({ _id: req.params.id }, async (err, doc) => {
-    let movieToPush = (doc[0].wish = await doc[0].wish.filter((obj) => {
+    let movieToPush = await doc[0].wish.filter((obj) => {
       return obj.imdbID === req.params.movie;
-    }));
+    });
 
     doc[0].wish = await doc[0].wish.filter((obj) => {
       return obj.imdbID !== req.params.movie;
