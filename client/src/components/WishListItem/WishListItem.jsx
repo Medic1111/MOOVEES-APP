@@ -20,21 +20,36 @@ const ListItem = ({ obj }) => {
       })
       .catch((err) => console.log(err));
   };
-  const addToWatchedHandler = () => {
-    listCtxMgr.setWatched((prev) => [...prev, obj]);
-    listCtxMgr.setWish(() => {
-      return listCtxMgr.wish.filter((objRet) => {
-        return objRet !== obj;
-      });
-    });
+  const moveToWatchedHandler = () => {
+    const movie = obj.imdbID;
+    const id = listCtxMgr.user;
+    axios
+      .patch(`/api/${id}/wishlist/watched/${movie}`)
+      .then((serverRes) => {
+        listCtxMgr.setWatched((prev) => [...prev, obj]);
+        listCtxMgr.setWish(() => {
+          return listCtxMgr.wish.filter((objRet) => {
+            return objRet !== obj;
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
-  const removeFromWatchedHandler = () => {
-    listCtxMgr.setWish(() => {
-      return listCtxMgr.wish.filter((objRet) => {
-        return objRet !== obj;
-      });
-    });
+  const removeFromWishHandler = () => {
+    const movie = obj.imdbID;
+    const id = listCtxMgr.user;
+
+    axios
+      .patch(`/api/${id}/wishlist/remove/${movie}`)
+      .then((serverRes) => {
+        listCtxMgr.setWish(() => {
+          return listCtxMgr.wish.filter((objRet) => {
+            return objRet !== obj;
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -43,10 +58,10 @@ const ListItem = ({ obj }) => {
       <p className={classes.pYear}>{obj.Year}</p>
       <img onClick={detailHandler} src={obj.Poster} />
       <div className={classes.btnBox}>
-        <button onClick={addToWatchedHandler} className={classes.btn}>
+        <button onClick={moveToWatchedHandler} className={classes.btn}>
           + Watched
         </button>
-        <button onClick={removeFromWatchedHandler} className={classes.btn}>
+        <button onClick={removeFromWishHandler} className={classes.btn}>
           Remove
         </button>
       </div>

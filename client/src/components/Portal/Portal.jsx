@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import classes from "./Portal.module.css";
+
 const portalRoot = document.getElementById("portal");
 
 const Wrapper = (props) => {

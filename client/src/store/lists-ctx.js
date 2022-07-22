@@ -7,12 +7,15 @@ export const listsCtx = createContext({
   setWatched: () => {},
   wish: [],
   setWish: () => {},
+  user: "",
+  setUser: () => {},
 });
 
 const ListsProvider = (props) => {
   const [data, setData] = useState([]);
   const [watched, setWatched] = useState([]);
   const [wish, setWish] = useState([]);
+  const [user, setUser] = useState("");
 
   return (
     <listsCtx.Provider
@@ -23,6 +26,8 @@ const ListsProvider = (props) => {
         setWatched,
         wish,
         setWish,
+        user,
+        setUser,
       }}
     >
       {props.children}

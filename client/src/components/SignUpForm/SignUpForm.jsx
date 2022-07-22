@@ -1,11 +1,15 @@
 import classes from "../Credentials/Credentials.module.css";
 import { useState, useContext } from "react";
 import { uiCtx } from "../../store/ui-ctx";
+import { listsCtx } from "../../store/lists-ctx";
 import axios from "axios";
 
 const SignUpForm = () => {
   const uiCtxMgr = useContext(uiCtx);
+  const listsCtxMgr = useContext(listsCtx);
 
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [userInput, setUserInput] = useState({
     username: "",
     email: "",
@@ -19,20 +23,27 @@ const SignUpForm = () => {
     });
   };
 
-  const signUpHandler = (e) => {
+  const logInHandler = () => {
+    uiCtxMgr.setShowLogin(true);
+  };
+
+  const signUpHandler = async (e) => {
     e.preventDefault();
-    console.log(userInput);
-    // AXIOS CALL API
-    axios
+    await axios
       .post("/api/register", userInput)
       .then((serverRes) => {
-        console.log(serverRes.data);
+        setError(false);
+        listsCtxMgr.setUser(serverRes.data._id);
+        listsCtxMgr.setWish(serverRes.data.wish);
+        listsCtxMgr.setWatched(serverRes.data.watched);
+        uiCtxMgr.setIsLoggedIn(true);
       })
       .catch((err) => {
-        console.log(err);
+        setError(true);
+        if (err.response.status === 409) setErrorMsg("Already Registered");
+        if (err.response.status === 400) setErrorMsg("Incomplete Form");
+        if (err.response.status === 500) setErrorMsg("Server Error");
       });
-
-    uiCtxMgr.setIsLoggedIn(true);
 
     setUserInput({
       username: "",
@@ -73,6 +84,10 @@ const SignUpForm = () => {
         value="Sign Up"
         type="submit"
       />
+      {error && <p className={classes.feedback}>{errorMsg}</p>}
+      <p className={classes.span} onClick={logInHandler}>
+        Already Resgister? Login
+      </p>
     </form>
   );
 };

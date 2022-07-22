@@ -1,11 +1,10 @@
 import { listsCtx } from "../../store/lists-ctx";
 import React, { useContext } from "react";
 import Form from "../../components/Form/Form";
-import List from "../../components/List/List";
 import Wrapper from "../../components/Wrapper/Wrapper";
-import WishList from "../../components/WishList/WishList";
-import Watched from "../../components/Watched/Watched";
+
 import DefaultBanner from "../../components/DefaultBanner/DefaultBanner";
+import UserSecs from "../UserSecs/userSecs";
 const MainPage = () => {
   const listCtxMgr = useContext(listsCtx);
 
@@ -13,9 +12,13 @@ const MainPage = () => {
     <React.Fragment>
       <Form />
       <Wrapper>
-        {listCtxMgr.data.length === 0 ? <DefaultBanner /> : <List />}
-        {listCtxMgr.wish.length === 0 || <WishList />}
-        {listCtxMgr.watched.length === 0 || <Watched />}
+        {listCtxMgr.data.length === 0 &&
+        listCtxMgr.wish.length === 0 &&
+        listCtxMgr.watched.length === 0 ? (
+          <DefaultBanner />
+        ) : (
+          <UserSecs />
+        )}
       </Wrapper>
     </React.Fragment>
   );

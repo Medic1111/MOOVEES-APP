@@ -1,11 +1,18 @@
 import classes from "../Credentials/Credentials.module.css";
 import { useState, useContext } from "react";
 import { uiCtx } from "../../store/ui-ctx";
-
+import { listsCtx } from "../../store/lists-ctx";
 import axios from "axios";
 
 const LoginForm = () => {
   const uiCtxMgr = useContext(uiCtx);
+  const listsCtxMgr = useContext(listsCtx);
+
+  const showResgisterHandler = () => {
+    uiCtxMgr.setShowLogin(false);
+  };
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [userLogin, setUserLogin] = useState({
     username: "",
@@ -19,11 +26,25 @@ const LoginForm = () => {
     });
   };
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    console.log(userLogin);
-    // AXIOS CALL API
-    uiCtxMgr.setIsLoggedIn(true);
+
+    await axios
+      .post("/api/login", userLogin)
+      .then((serverRes) => {
+        setError(false);
+        listsCtxMgr.setUser(serverRes.data[0]._id);
+        listsCtxMgr.setWatched(serverRes.data[0].watched);
+        listsCtxMgr.setWish(serverRes.data[0].wish);
+        uiCtxMgr.setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        setError(true);
+        if (err.response.status === 401) setErrorMsg("Wrong Credentials");
+        if (err.response.status === 404) setErrorMsg("Not Registered");
+        if (err.response.status === 500) setErrorMsg("Server Error");
+      });
+
     setUserLogin({
       username: "",
       password: "",
@@ -53,6 +74,10 @@ const LoginForm = () => {
         value="Login"
         type="submit"
       />
+      {error && <p className={classes.feedback}>{errorMsg}</p>}
+      <p onClick={showResgisterHandler} className={classes.span}>
+        Don't have an account? Register
+      </p>
     </form>
   );
 };

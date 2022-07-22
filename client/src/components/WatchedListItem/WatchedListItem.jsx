@@ -25,11 +25,19 @@ const WatchedListItem = ({ obj }) => {
   };
 
   const removeFromWatchedHandler = () => {
-    listCtxMgr.setWatched(() => {
-      return listCtxMgr.watched.filter((objRet) => {
-        return objRet !== obj;
-      });
-    });
+    const movie = obj.imdbID;
+    const id = listCtxMgr.user;
+
+    axios
+      .patch(`/api/${id}/watched/remove/${movie}`)
+      .then((serverRes) => {
+        listCtxMgr.setWatched(() => {
+          return listCtxMgr.watched.filter((objRet) => {
+            return objRet !== obj;
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

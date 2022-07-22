@@ -1,13 +1,19 @@
 import classes from "./Header.module.css";
 import { uiCtx } from "../../store/ui-ctx";
+import { listsCtx } from "../../store/lists-ctx";
 import { useContext } from "react";
 
 const Header = () => {
   const uiCtxMgr = useContext(uiCtx);
+  const listsCtxMgr = useContext(listsCtx);
 
   const logOutHandler = () => {
     uiCtxMgr.setShowLogin(false);
     uiCtxMgr.setIsLoggedIn(false);
+    listsCtxMgr.setUser("");
+    listsCtxMgr.setData([]);
+    listsCtxMgr.setWatched([]);
+    listsCtxMgr.setWish([]);
   };
   const logInHandler = () => {
     uiCtxMgr.setShowLogin(true);
@@ -20,7 +26,7 @@ const Header = () => {
         onClick={uiCtxMgr.showLogin ? logOutHandler : logInHandler}
         className={classes.logOut}
       >
-        {uiCtxMgr.isLoggedIn ? "Log out" : "Login"}
+        {uiCtxMgr.isLoggedIn && "Log out"}
       </button>
     </header>
   );

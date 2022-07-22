@@ -11,12 +11,29 @@ const ListItem = ({ obj }) => {
   const detailCtxMgr = useContext(detailCtx);
   const uiCtxMgr = useContext(uiCtx);
 
-  const addToWatchedHandler = () => {
-    listCtxMgr.setWatched((prev) => [...prev, obj]);
+  const addToWatchedHandler = async () => {
+    await axios
+      .post(`/api/${listCtxMgr.user}/watched`, obj)
+      .then((serverRes) => {
+        listCtxMgr.setWatched(serverRes.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        // ADDRESS SERVER ERRORS
+      });
   };
 
-  const addToWishHandler = () => {
-    listCtxMgr.setWish((prev) => [...prev, obj]);
+  const addToWishHandler = async () => {
+    await axios
+      .post(`/api/${listCtxMgr.user}/wish`, obj)
+      .then((serverRes) => {
+        console.log(serverRes.data);
+        listCtxMgr.setWish(serverRes.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        // ADDRESS SERVER ERRORS
+      });
   };
 
   const detailHandler = async () => {

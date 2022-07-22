@@ -12,7 +12,8 @@ const app = express();
 // PERSONAL ROUTES:
 
 const postMovieRoute = require("./routes/postMovieTitle");
-const { registerRoute } = require("./routes/auth");
+const { registerRoute, loginRoute } = require("./routes/auth");
+const getSpecMovieRoute = require("./routes/getSpecMovie");
 
 // DB CONNECTION
 
@@ -30,31 +31,90 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use("/", postMovieRoute);
 app.use("/", registerRoute);
+app.use("/", loginRoute);
+app.use("/", getSpecMovieRoute);
 
 // CURRENT:
 
-app.get("/api/movie/:id", async (req, res) => {
+app.post("/api/:id/watched", (req, res) => {
   let id = req.params.id;
-  let url = `https://www.omdbapi.com/?apikey=${process.env.MOVIE_KEY_API}&i=${id}`;
-  await axios
-    .get(url)
-    .then((apiRes) => {
-      let resObj = {
-        Title: apiRes.data.Title,
-        Year: apiRes.data.Year,
-        Runtime: apiRes.data.Runtime,
-        Actors: apiRes.data.Actors,
-        Director: apiRes.data.Director,
-        Plot: apiRes.data.Plot,
-        Poster: apiRes.data.Poster,
-      };
-      res.status(200).json(resObj);
-    })
-    .catch((err) =>
-      res
-        .status(500)
-        .json({ message: "Oops, something went wrong. Please try again." })
+  let newMovie = req.body;
+
+  User.find({ _id: id }, async (err, doc) => {
+    await doc[0].watched.push(newMovie);
+
+    await doc[0].save((err, entry) => {
+      err
+        ? res.status(500).json({ message: "Server error, oops try again" })
+        : res.status(200).json(entry.watched);
+    });
+  });
+});
+
+app.post("/api/:id/wish", (req, res) => {
+  let id = req.params.id;
+  let newMovie = req.body;
+
+  User.find({ _id: id }, async (err, doc) => {
+    await doc[0].wish.push(newMovie);
+
+    await doc[0].save((err, entry) => {
+      err
+        ? res.status(500).json({ message: "Server error, oops try again" })
+        : res.status(200).json(entry.wish);
+    });
+  });
+});
+
+// DELETE FROM WISH
+
+app.patch("/api/:id/wishlist/remove/:movie", (req, res) => {
+  User.find({ _id: req.params.id }, async (err, doc) => {
+    doc[0].wish = await doc[0].wish.filter((obj) => {
+      return obj.imdbID !== req.params.movie;
+    });
+    await doc[0].save((err, succ) =>
+      err
+        ? res.status(500).json({ message: "Failed request" })
+        : res.status(200).json({ message: "Removed" })
     );
+  });
+});
+
+// DELETE FROM WATCHED
+
+app.patch("/api/:id/watched/remove/:movie", (req, res) => {
+  User.find({ _id: req.params.id }, async (err, doc) => {
+    doc[0].watched = await doc[0].watched.filter((obj) => {
+      return obj.imdbID !== req.params.movie;
+    });
+    await doc[0].save((err, succ) =>
+      err
+        ? res.status(500).json({ message: "Failed request" })
+        : res.status(200).json({ message: "Removed" })
+    );
+  });
+});
+
+// MOVE TO WATCHED
+app.patch("/api/:id/wishlist/watched/:movie", (req, res) => {
+  User.find({ _id: req.params.id }, async (err, doc) => {
+    let movieToPush = (doc[0].wish = await doc[0].wish.filter((obj) => {
+      return obj.imdbID === req.params.movie;
+    }));
+
+    doc[0].wish = await doc[0].wish.filter((obj) => {
+      return obj.imdbID !== req.params.movie;
+    });
+
+    await doc[0].watched.push(movieToPush);
+
+    await doc[0].save((err, succ) =>
+      err
+        ? res.status(500).json({ message: "Failed request" })
+        : res.status(200).json({ message: "Removed" })
+    );
+  });
 });
 
 // UNHANDLED ROUTES
