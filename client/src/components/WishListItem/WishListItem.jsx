@@ -20,10 +20,10 @@ const ListItem = ({ obj }) => {
       })
       .catch((err) => console.log(err));
   };
-  const moveToWatchedHandler = () => {
+  const moveToWatchedHandler = async () => {
     const movie = obj.imdbID;
     const id = listCtxMgr.user;
-    axios
+    await axios
       .patch(`/api/${id}/wishlist/watched/${movie}`)
       .then((serverRes) => {
         listCtxMgr.setWatched((prev) => [...prev, obj]);
@@ -36,11 +36,11 @@ const ListItem = ({ obj }) => {
       .catch((err) => console.log(err));
   };
 
-  const removeFromWishHandler = () => {
+  const removeFromWishHandler = async () => {
     const movie = obj.imdbID;
     const id = listCtxMgr.user;
 
-    axios
+    await axios
       .patch(`/api/${id}/wishlist/remove/${movie}`)
       .then((serverRes) => {
         listCtxMgr.setWish(() => {

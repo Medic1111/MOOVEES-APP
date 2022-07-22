@@ -46,7 +46,7 @@ const WatchedListItem = ({ obj }) => {
       <p className={classes.pYear}>{obj.Year}</p>
       <img onClick={detailHandler} src={obj.Poster} />
       <div className={classes.btnBox}>
-        <p className={classes.stars}>
+        {/* <p className={classes.stars}>
           {rate.map((item, index) => {
             return (
               <Stars
@@ -58,7 +58,7 @@ const WatchedListItem = ({ obj }) => {
               />
             );
           })}
-        </p>
+        </p> */}
         <button onClick={removeFromWatchedHandler} className={classes.btn}>
           Remove
         </button>
