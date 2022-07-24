@@ -1,7 +1,7 @@
 {
-  "name": "test-dir-empty",
+  "name": "moovees-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A movie tracker application",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",

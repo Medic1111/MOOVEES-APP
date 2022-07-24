@@ -20,8 +20,9 @@
 .pTitle {
   font-size: 1.7em;
   text-align: center;
-  min-height: 5vh;
+  /* min-height: 5vh; */
   color: #f7f7f7d4;
+  /* background-color: #f7f7f7; */
 }
 .pYear {
   font-size: 1.3em;
@@ -39,6 +40,7 @@
 }
 .btn:hover {
   background-color: #f7f7f753;
+  background-color: rgb(28, 167, 183);
   transition: 0.2s;
 }
 img {
