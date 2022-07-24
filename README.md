@@ -1,4 +1,4 @@
-# FOOD QR
+# MOOVEES-APP
 
 [Live App Here](https://moovees-app.herokuapp.com/)
 
