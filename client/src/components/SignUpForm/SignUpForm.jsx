@@ -34,7 +34,6 @@ const SignUpForm = () => {
       .post("/api/register", userInput)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-
         setError(false);
         listsCtxMgr.setUser(serverRes.data._id);
         listsCtxMgr.setWish(serverRes.data.wish);
@@ -43,7 +42,6 @@ const SignUpForm = () => {
       })
       .catch((err) => {
         uiCtxMgr.setIsLoading(false);
-
         setError(true);
         if (err.response.status === 409) setErrorMsg("Already Registered");
         if (err.response.status === 400) setErrorMsg("Incomplete Form");
@@ -72,7 +70,7 @@ const SignUpForm = () => {
         onChange={inputChangeHandler}
         value={userInput.email}
         className={classes.input}
-        type="text"
+        type="email"
         placeholder="Email"
       />
       <input
@@ -80,7 +78,7 @@ const SignUpForm = () => {
         onChange={inputChangeHandler}
         value={userInput.password}
         className={classes.input}
-        type="text"
+        type="password"
         placeholder="Password"
       />
       <input

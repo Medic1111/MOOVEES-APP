@@ -22,8 +22,6 @@ const ListItem = ({ obj }) => {
       })
       .catch((err) => {
         uiCtxMgr.setIsLoading(false);
-
-        console.log(err);
       });
   };
   const moveToWatchedHandler = async () => {
@@ -35,7 +33,6 @@ const ListItem = ({ obj }) => {
       .patch(`/api/${id}/wishlist/watched/${movie}`)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-
         listCtxMgr.setWatched((prev) => [...prev, obj]);
         listCtxMgr.setWish(() => {
           return listCtxMgr.wish.filter((objRet) => {
@@ -44,7 +41,6 @@ const ListItem = ({ obj }) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         uiCtxMgr.setIsLoading(false);
       });
   };
@@ -58,7 +54,6 @@ const ListItem = ({ obj }) => {
       .patch(`/api/${id}/wishlist/remove/${movie}`)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-
         listCtxMgr.setWish(() => {
           return listCtxMgr.wish.filter((objRet) => {
             return objRet !== obj;
@@ -67,8 +62,6 @@ const ListItem = ({ obj }) => {
       })
       .catch((err) => {
         uiCtxMgr.setIsLoading(false);
-
-        console.log(err);
       });
   };
 

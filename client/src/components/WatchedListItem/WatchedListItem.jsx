@@ -14,14 +14,18 @@ const WatchedListItem = ({ obj }) => {
   const uiCtxMgr = useContext(uiCtx);
 
   const detailHandler = async () => {
+    uiCtxMgr.setIsLoading(true);
     let id = obj.imdbID;
     await axios
       .get(`/api/movie/${id}`)
       .then((serverRes) => {
         detailCtxMgr.setDetailInfo(serverRes.data);
         uiCtxMgr.setShowModal(true);
+        uiCtxMgr.setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        uiCtxMgr.setIsLoading(false);
+      });
   };
 
   const removeFromWatchedHandler = () => {
@@ -33,7 +37,6 @@ const WatchedListItem = ({ obj }) => {
       .patch(`/api/${id}/watched/remove/${movie}`)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-
         listCtxMgr.setWatched(() => {
           return listCtxMgr.watched.filter((objRet) => {
             return objRet !== obj;
@@ -42,8 +45,6 @@ const WatchedListItem = ({ obj }) => {
       })
       .catch((err) => {
         uiCtxMgr.setIsLoading(false);
-
-        console.log(err);
       });
   };
 

@@ -17,39 +17,29 @@ const ListItem = ({ obj }) => {
       .post(`/api/${listCtxMgr.user}/watched`, obj)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-
         listCtxMgr.setWatched(serverRes.data);
       })
       .catch((err) => {
-        console.log(err);
         uiCtxMgr.setIsLoading(false);
-
-        // ADDRESS SERVER ERRORS
       });
   };
 
   const addToWishHandler = async () => {
     uiCtxMgr.setIsLoading(true);
-
     await axios
       .post(`/api/${listCtxMgr.user}/wish`, obj)
       .then((serverRes) => {
-        console.log(serverRes.data);
         listCtxMgr.setWish(serverRes.data);
         uiCtxMgr.setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         uiCtxMgr.setIsLoading(false);
-
-        // ADDRESS SERVER ERRORS
       });
   };
 
   const detailHandler = async () => {
     let id = obj.imdbID;
     uiCtxMgr.setIsLoading(true);
-
     await axios
       .get(`/api/movie/${id}`)
       .then((serverRes) => {
@@ -59,8 +49,6 @@ const ListItem = ({ obj }) => {
       })
       .catch((err) => {
         uiCtxMgr.setIsLoading(false);
-
-        console.log(err);
       });
   };
 

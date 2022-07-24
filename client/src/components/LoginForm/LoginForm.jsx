@@ -33,7 +33,6 @@ const LoginForm = () => {
       .post("/api/login", userLogin)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-
         setError(false);
         listsCtxMgr.setUser(serverRes.data[0]._id);
         listsCtxMgr.setWatched(serverRes.data[0].watched);
@@ -68,7 +67,7 @@ const LoginForm = () => {
         onChange={inputChangeHandler}
         value={userLogin.password}
         className={classes.input}
-        type="text"
+        type="password"
         placeholder="Password"
       />
       <input

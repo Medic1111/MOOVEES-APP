@@ -5,14 +5,13 @@
   gap: 0.25em;
   justify-content: space-between;
   align-items: center;
-  /* ASPECT RATIO FIGURE THIS SHIT OUT */
 }
 .btnBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 13%;
+  min-height: 11%;
   gap: 2%;
   width: 100%;
 }
@@ -20,9 +19,7 @@
 .pTitle {
   font-size: 1.7em;
   text-align: center;
-  /* min-height: 5vh; */
   color: #f7f7f7d4;
-  /* background-color: #f7f7f7; */
 }
 .pYear {
   font-size: 1.3em;
@@ -39,12 +36,11 @@
   cursor: pointer;
 }
 .btn:hover {
-  background-color: #f7f7f753;
   background-color: rgb(28, 167, 183);
   transition: 0.2s;
 }
 img {
-  height: 75%;
+  height: 74%;
   cursor: pointer;
   aspect-ratio: 1/1;
   aspect-ratio: 0.75;

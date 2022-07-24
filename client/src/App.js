@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { uiCtx } from "./store/ui-ctx";

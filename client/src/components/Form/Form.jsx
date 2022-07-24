@@ -11,10 +11,11 @@ const Form = () => {
   const [userInput, setUserInput] = useState("");
   const [error, setError] = useState(false);
   const [serverError, setServerError] = useState(false);
-  const postToApiHandler = (e) => {
+
+  const postToApiHandler = async (e) => {
     uiCtxMgr.setIsLoading(true);
     e.preventDefault();
-    axios
+    await axios
       .post("/api/movies/title", { userInput })
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
