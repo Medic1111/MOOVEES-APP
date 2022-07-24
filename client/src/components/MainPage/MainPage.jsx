@@ -11,7 +11,7 @@ const MainPage = () => {
   const uiCtxMgr = useContext(uiCtx);
   return (
     <React.Fragment>
-      {uiCtxMgr.isLoading && <Spinner />}
+      {/* {uiCtxMgr.isLoading && <Spinner />} */}
       <Form />
       <Wrapper>
         {listCtxMgr.data.length === 0 &&
