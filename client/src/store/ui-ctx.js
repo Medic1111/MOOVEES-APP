@@ -7,12 +7,16 @@ export const uiCtx = createContext({
   setShowLogin: () => {},
   showModal: false,
   setShowModal: () => {},
+  isLoading: false,
+  setIsLoading: () => {},
 });
 
 const UiCtxProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <uiCtx.Provider
       value={{
@@ -22,6 +26,8 @@ const UiCtxProvider = (props) => {
         setShowLogin,
         showModal,
         setShowModal,
+        isLoading,
+        setIsLoading,
       }}
     >
       {props.children}

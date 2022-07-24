@@ -12,39 +12,56 @@ const ListItem = ({ obj }) => {
   const uiCtxMgr = useContext(uiCtx);
 
   const addToWatchedHandler = async () => {
+    uiCtxMgr.setIsLoading(true);
     await axios
       .post(`/api/${listCtxMgr.user}/watched`, obj)
       .then((serverRes) => {
+        uiCtxMgr.setIsLoading(false);
+
         listCtxMgr.setWatched(serverRes.data);
       })
       .catch((err) => {
         console.log(err);
+        uiCtxMgr.setIsLoading(false);
+
         // ADDRESS SERVER ERRORS
       });
   };
 
   const addToWishHandler = async () => {
+    uiCtxMgr.setIsLoading(true);
+
     await axios
       .post(`/api/${listCtxMgr.user}/wish`, obj)
       .then((serverRes) => {
         console.log(serverRes.data);
         listCtxMgr.setWish(serverRes.data);
+        uiCtxMgr.setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        uiCtxMgr.setIsLoading(false);
+
         // ADDRESS SERVER ERRORS
       });
   };
 
   const detailHandler = async () => {
     let id = obj.imdbID;
+    uiCtxMgr.setIsLoading(true);
+
     await axios
       .get(`/api/movie/${id}`)
       .then((serverRes) => {
         detailCtxMgr.setDetailInfo(serverRes.data);
         uiCtxMgr.setShowModal(true);
+        uiCtxMgr.setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        uiCtxMgr.setIsLoading(false);
+
+        console.log(err);
+      });
   };
 
   return (

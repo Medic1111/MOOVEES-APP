@@ -12,20 +12,30 @@ const ListItem = ({ obj }) => {
 
   const detailHandler = async () => {
     let id = obj.imdbID;
+    uiCtxMgr.setIsLoading(true);
     await axios
       .get(`/api/movie/${id}`)
       .then((serverRes) => {
         detailCtxMgr.setDetailInfo(serverRes.data);
         uiCtxMgr.setShowModal(true);
+        uiCtxMgr.setIsLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        uiCtxMgr.setIsLoading(false);
+
+        console.log(err);
+      });
   };
   const moveToWatchedHandler = async () => {
     const movie = obj.imdbID;
     const id = listCtxMgr.user;
+    uiCtxMgr.setIsLoading(true);
+
     await axios
       .patch(`/api/${id}/wishlist/watched/${movie}`)
       .then((serverRes) => {
+        uiCtxMgr.setIsLoading(false);
+
         listCtxMgr.setWatched((prev) => [...prev, obj]);
         listCtxMgr.setWish(() => {
           return listCtxMgr.wish.filter((objRet) => {
@@ -33,23 +43,33 @@ const ListItem = ({ obj }) => {
           });
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        uiCtxMgr.setIsLoading(false);
+      });
   };
 
   const removeFromWishHandler = async () => {
     const movie = obj.imdbID;
     const id = listCtxMgr.user;
+    uiCtxMgr.setIsLoading(true);
 
     await axios
       .patch(`/api/${id}/wishlist/remove/${movie}`)
       .then((serverRes) => {
+        uiCtxMgr.setIsLoading(false);
+
         listCtxMgr.setWish(() => {
           return listCtxMgr.wish.filter((objRet) => {
             return objRet !== obj;
           });
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        uiCtxMgr.setIsLoading(false);
+
+        console.log(err);
+      });
   };
 
   return (

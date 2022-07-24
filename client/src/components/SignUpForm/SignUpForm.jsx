@@ -29,9 +29,12 @@ const SignUpForm = () => {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
+    uiCtxMgr.setIsLoading(true);
     await axios
       .post("/api/register", userInput)
       .then((serverRes) => {
+        uiCtxMgr.setIsLoading(false);
+
         setError(false);
         listsCtxMgr.setUser(serverRes.data._id);
         listsCtxMgr.setWish(serverRes.data.wish);
@@ -39,6 +42,8 @@ const SignUpForm = () => {
         uiCtxMgr.setIsLoggedIn(true);
       })
       .catch((err) => {
+        uiCtxMgr.setIsLoading(false);
+
         setError(true);
         if (err.response.status === 409) setErrorMsg("Already Registered");
         if (err.response.status === 400) setErrorMsg("Incomplete Form");

@@ -28,10 +28,12 @@ const LoginForm = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-
+    uiCtxMgr.setIsLoading(true);
     await axios
       .post("/api/login", userLogin)
       .then((serverRes) => {
+        uiCtxMgr.setIsLoading(false);
+
         setError(false);
         listsCtxMgr.setUser(serverRes.data[0]._id);
         listsCtxMgr.setWatched(serverRes.data[0].watched);
@@ -39,6 +41,7 @@ const LoginForm = () => {
         uiCtxMgr.setIsLoggedIn(true);
       })
       .catch((err) => {
+        uiCtxMgr.setIsLoading(false);
         setError(true);
         if (err.response.status === 401) setErrorMsg("Wrong Credentials");
         if (err.response.status === 404) setErrorMsg("Not Registered");
