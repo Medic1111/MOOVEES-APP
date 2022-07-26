@@ -42,3 +42,10 @@ App that allows a registered user to search for movies and tv shows titles, and 
 
 MIT License
 Copyright (c) 2022 Aryse Gabrielle Pagano
+
+---
+
+_to_ _do_:
+
+1. Test WatchList API
+2. Test WishList API
