@@ -44,21 +44,25 @@ const registerUser = (req, res) => {
 const login = (req, res) => {
   const { username, password } = req.body;
 
-  User.find({ username: username }, (err, doc) => {
-    if (err) {
-      res.status(500).json({ message: "Server error. Oops, try again." });
-    } else {
-      if (doc.length === 0) {
-        res.status(404).json({ message: "Not registered" });
+  if (!username || !password) {
+    res.status(400).json({ message: "All fields are required" });
+  } else {
+    User.find({ username: username }, (err, doc) => {
+      if (err) {
+        res.status(500).json({ message: "Server error. Oops, try again." });
       } else {
-        bcrypt.compare(password, doc[0].password, (err, match) => {
-          match
-            ? res.status(200).json(doc)
-            : res.status(401).json({ message: "Not auth" });
-        });
+        if (doc.length === 0) {
+          res.status(404).json({ message: "Not registered" });
+        } else {
+          bcrypt.compare(password, doc[0].password, (err, match) => {
+            match
+              ? res.status(200).json(doc)
+              : res.status(401).json({ message: "Not auth" });
+          });
+        }
       }
-    }
-  });
+    });
+  }
 };
 
 module.exports = { registerUser, login };
