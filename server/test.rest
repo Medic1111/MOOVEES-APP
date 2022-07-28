@@ -1,0 +1,196 @@
+
+@testId = 62dd9e76f2ebb09a7505614a
+@movieId= tt0104431
+# POST TO GET MOVIE BY TITLE USED FOR GENERAL
+# USER INPUT SEARCH
+
+POST http://localhost:3002/api/movies/title HTTP/1.1
+Content-Type: application/json
+
+{
+  "userInput": "titanic"
+}
+###
+
+# GET MOVIE BY ID USED TO GET SPECIFIC
+# MOVIE WITH DETAIL INFORMATION
+
+GET http://localhost:3002/api/movie/tt4437732 HTTP/1.1
+
+###
+
+# LOGIN ATTEMPT WHEN USER NOT REGISTERED
+
+POST http://localhost:3002/api/login
+Content-Type: application/json
+
+{
+  "username": "newoneExtension",
+  "password":"newoneExtension"
+}
+
+###
+
+# LOGIN USER REGISTERED
+
+POST http://localhost:3002/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "medic1111",
+  "password":"1111"
+}
+
+###
+
+# ATTEMPT LOGIN NO/MISSING CREDENTIALS
+
+POST http://localhost:3002/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "medic1111",
+  "password":""
+}
+
+###
+
+POST http://localhost:3002/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "",
+  "password":"1111"
+}
+
+###
+
+POST http://localhost:3002/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "",
+  "password":""
+}
+
+###
+
+# ATTEMPT LOGIN WRONG CREDENTIALS
+
+POST http://localhost:3002/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "medic1111",
+  "password":"1234",
+  
+}
+
+###
+
+# REGISTER WITH NO/MISSING DATA
+
+POST http://localhost:3002/api/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "medic1234",
+  "password":"",
+  "email": "test@testing.again"
+}
+
+###
+
+POST http://localhost:3002/api/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "",
+  "password":"1111",
+  "email": "test@testing.again"
+}
+
+###
+
+POST http://localhost:3002/api/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "medic1234",
+  "password":"1234",
+  "email": ""
+}
+
+###
+
+# ATTEMPT REGISTER WITH EMAIL ALREADY
+# REGISTERED
+
+POST http://localhost:3002/api/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "newUserTet",
+    "password": "newUserTet",
+    "email": "newUserTest@newUsrst.com"
+}
+
+###
+
+# REGISTER SUCCESSFUL
+
+POST http://localhost:3002/api/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "{{$randomInt 0 1000}}username",
+    "password": "{{$randomInt 0 1000}}password",
+    "email": "{{$randomInt 0 1000}}@newUsrst.com"
+}
+
+###
+
+# WATCH LIST ADD ONE BY MOVIE OBJ BODY
+# and USER ID PARAMS
+
+POST http://localhost:3002/api/{{testId}}/watched HTTP/1.1
+Content-Type: application/json
+
+{
+  "Title": "Home Alone 2: Lost in New York",
+  "Year": "1992",
+  "imdbID": "tt0104431",
+  "Type": "movie",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BNDI1MzM0Y2YtYmIyMS00ODE3LTlhZjEtZTUyNmEzMTNhZWU5XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+}
+
+###
+
+# DELETE FROM WATCHED
+PATCH http://localhost:3002/api/{{testId}}/watched/remove/{{movieId}}
+
+###
+
+# ADD TO WISH LIST
+
+POST http://localhost:3002/api/{{testId}}/wish
+Content-Type: application/json
+
+{
+  "Title": "Home Alone 2: Lost in New York",
+  "Year": "1992",
+  "imdbID": "tt0104431",
+  "Type": "movie",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BNDI1MzM0Y2YtYmIyMS00ODE3LTlhZjEtZTUyNmEzMTNhZWU5XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+}
+
+###
+
+# MOVE FROM WISH TO WATCHED
+
+PATCH http://localhost:3002/api/{{testId}}/wishlist/remove/{{movieId}}
+
+###
+
+# MOVE TO WATCHED
+PATCH http://localhost:3002/api/{{testId}}/wishlist/watched/{{movieId}}

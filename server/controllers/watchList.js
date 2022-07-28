@@ -43,7 +43,7 @@ const moveToWatch = (req, res) => {
     await doc[0].save((err, succ) =>
       err
         ? res.status(500).json({ message: "Failed request" })
-        : res.status(200).json({ message: "Removed" })
+        : res.status(200).json({ message: "Moved to watched" })
     );
   });
 };
