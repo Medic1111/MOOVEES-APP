@@ -89,7 +89,7 @@ const SignUpForm = () => {
       />
       {error && <p className={classes.feedback}>{errorMsg}</p>}
       <p className={classes.span} onClick={logInHandler}>
-        Already Resgister? Login
+        Already Registered? Login
       </p>
     </form>
   );
