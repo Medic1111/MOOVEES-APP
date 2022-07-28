@@ -6,7 +6,6 @@ const postToWatch = (req, res) => {
 
   User.find({ _id: id }, async (err, doc) => {
     await doc[0].watched.push(newMovie);
-
     await doc[0].save((err, entry) => {
       err
         ? res.status(500).json({ message: "Server error, oops try again" })

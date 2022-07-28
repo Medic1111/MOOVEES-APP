@@ -186,11 +186,11 @@ Content-Type: application/json
 
 ###
 
-# MOVE FROM WISH TO WATCHED
+# REMOVE FROM WISH 
 
 PATCH http://localhost:3002/api/{{testId}}/wishlist/remove/{{movieId}}
 
 ###
 
-# MOVE TO WATCHED
+# MOVE FROM WISH TO WATCHED
 PATCH http://localhost:3002/api/{{testId}}/wishlist/watched/{{movieId}}

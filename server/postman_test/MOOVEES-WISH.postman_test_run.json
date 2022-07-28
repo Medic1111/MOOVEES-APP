@@ -1,0 +1,98 @@
+{
+	"id": "49492278-7fae-4318-8cc0-9039dae5e9c7",
+	"name": "MOOVEES-WISH",
+	"timestamp": "2022-07-28T02:50:26.416Z",
+	"collection_id": "19650814-04073b1f-7161-472d-80be-fb907e0ee944",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 5,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "3ea900d5-32e3-47f0-9a71-6a3774614fec",
+			"name": "ADD TO WISH",
+			"url": "http://localhost:3002/api/62dd9e76f2ebb09a7505614a/wish",
+			"time": 125,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response time is less than 200ms": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 200ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				125
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response time is less than 200ms": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "447a4a43-7448-420e-9e1b-aaabee36e2ad",
+			"name": "REMOVE FROM WISH",
+			"url": "http://localhost:3002/api/62dd9e76f2ebb09a7505614a/wishlist/remove/tt0104431",
+			"time": 100,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response time is less than 200ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 200ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				100
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response time is less than 200ms": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 225,
+	"collection": {
+		"requests": [
+			{
+				"id": "3ea900d5-32e3-47f0-9a71-6a3774614fec",
+				"method": "POST"
+			},
+			{
+				"id": "447a4a43-7448-420e-9e1b-aaabee36e2ad",
+				"method": "PATCH"
+			}
+		]
+	}
+}

@@ -8,7 +8,6 @@ const getByTitle = (req, res) => {
   axios
     .get(movieUrl)
     .then((apiRes) => {
-      console.log(apiRes.data.Search.imdbID);
       apiRes.data.Search !== undefined
         ? res.status(200).json(apiRes.data.Search)
         : res.status(404).json({ message: "Entry not found" });
