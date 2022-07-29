@@ -40,4 +40,5 @@ describe("Runnin tests on the App component", () => {
     });
     expect(registerLink).not.toBeNull();
   });
+
 });
