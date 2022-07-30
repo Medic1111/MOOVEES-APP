@@ -35,6 +35,8 @@ const Form = () => {
       <input
         value={userInput}
         onChange={(e) => {
+          setError(false);
+          setServerError(false);
           setUserInput(e.target.value);
         }}
         className={classes.input}
@@ -46,9 +48,12 @@ const Form = () => {
         className={classes.submit}
         type="submit"
       />
-      {error && <p>THIS MOVIE DOES NOT EXIT</p>}
-      {serverError && <p>Oops, something went wrong, please try again</p>}
-      {/* CHANGE CSS FOR THIS, SIDEWAYS WITH FORM */}
+      {error && <p className={classes.feedback}>Nothing found...</p>}
+      {serverError && (
+        <p className={classes.feedback}>
+          Oops, something went wrong, please try again
+        </p>
+      )}
     </form>
   );
 };
