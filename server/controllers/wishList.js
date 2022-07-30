@@ -5,7 +5,7 @@ const addToWish = (req, res) => {
   let newMovie = req.body;
 
   User.find({ _id: id }, async (err, doc) => {
-    await doc[0].wish.push(newMovie);
+    await doc[0].wish.unshift(newMovie);
 
     await doc[0].save((err, entry) => {
       err

@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "9d96fc67-596a-4198-bb4b-9fe088106382",
+		"name": "LOGIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19650814"
+	},
+	"item": [
+		{
+			"name": "LOGIN/ user not registered",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"newone\", \"password\":\"newone\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Log in to app with non existing credentials"
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN/ user registered",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"Test data type of the response\", () => {",
+							"  pm.expect(jsonData).to.be.an(\"array\");",
+							"  pm.expect(jsonData).to.not.be.empty;",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"medic1111\", \"password\":\"1111\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN/ no or missing data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"\",\n    \"password\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN/ wrong credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"medic1111\", \"password\":\"1112\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

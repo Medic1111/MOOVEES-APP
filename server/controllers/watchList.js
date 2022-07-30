@@ -1,3 +1,4 @@
+const e = require("express");
 const { User } = require("../models/models");
 
 const postToWatch = (req, res) => {
@@ -5,7 +6,7 @@ const postToWatch = (req, res) => {
   let newMovie = req.body;
 
   User.find({ _id: id }, async (err, doc) => {
-    await doc[0].watched.push(newMovie);
+    await doc[0].watched.unshift(newMovie);
     await doc[0].save((err, entry) => {
       err
         ? res.status(500).json({ message: "Server error, oops try again" })
@@ -36,9 +37,7 @@ const moveToWatch = (req, res) => {
     doc[0].wish = await doc[0].wish.filter((obj) => {
       return obj.imdbID !== req.params.movie;
     });
-
-    await doc[0].watched.push(movieToPush[0]);
-
+    await doc[0].watched.unshift(movieToPush[0]);
     await doc[0].save((err, succ) =>
       err
         ? res.status(500).json({ message: "Failed request" })

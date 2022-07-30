@@ -42,7 +42,7 @@ App that allows a registered user to search for movies and tv shows titles, and 
 #### INSTALL
 
 1. Download the project
-2. Open the project and on the root run `npm install` then `node server/index.js`
+2. Open the project and on the root run `npm install` then `node server/listen.js`
 3. On a different terminal, run `cd client`, then `npm install` and finally `npm start`
 
 #### LICENSE
