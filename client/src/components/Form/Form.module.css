@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .input {
@@ -33,6 +34,14 @@
 .submit:hover {
   background-color: rgba(28, 168, 183, 0.846);
   transition: 0.25s;
+}
+.feedback {
+  font-size: 2em;
+  letter-spacing: 1px;
+  color: rgb(28, 168, 183);
+  color: rgb(183, 168, 28);
+
+  margin-top: 0.5em;
 }
 
 @media (max-width: 798px) {
