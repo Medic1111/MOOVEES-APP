@@ -33,7 +33,7 @@ const ListItem = ({ obj }) => {
       .patch(`/api/${id}/wishlist/watched/${movie}`)
       .then((serverRes) => {
         uiCtxMgr.setIsLoading(false);
-        listCtxMgr.setWatched((prev) => [...prev, obj]);
+        listCtxMgr.setWatched((prev) => [obj, ...prev]);
         listCtxMgr.setWish(() => {
           return listCtxMgr.wish.filter((objRet) => {
             return objRet !== obj;
