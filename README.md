@@ -29,12 +29,11 @@ App that allows a registered user to search for movies and tv shows titles, and 
 5. Deployment:
    - Heroku
 6. Testing Tools:
-   - API endpoints with REST Client Ext.
-   - Reports with Postman exports
-   - Test with Postman Collection Run
-   - Collection Test Locally with Newman
-   - Unit Testing with Jest
-   - Integration with Supertest
+   - Postman
+   - Newman
+   - REST Client ext
+   - Jest
+   - Supertest
 
 > STATUS: MVP
 > Exploring personal rating feature.
