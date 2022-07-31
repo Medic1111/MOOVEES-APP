@@ -59,7 +59,7 @@ describe("Testing the Login route possible instances", () => {
           expect.objectContaining({ message: expect.any(String) })
         );
         expect(serverRes.body).toEqual(
-          expect.objectContaining({ message: "Not registered" })
+          expect.objectContaining({ message: "Not auth" })
         );
       })
       .catch((err) => console.log(err));
@@ -77,6 +77,9 @@ describe("Testing the Login route possible instances", () => {
         expect(serverRes.body).toEqual(expect.any(Object));
         expect(serverRes.body).toEqual(
           expect.objectContaining({ message: expect.any(String) })
+        );
+        expect(serverRes.body).toEqual(
+          expect.objectContaining({ message: "Not registered" })
         );
       })
       .catch((err) => console.log(err));

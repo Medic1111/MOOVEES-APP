@@ -26,7 +26,7 @@ describe("Testing routes and responses for REGISTER", () => {
           expect.objectContaining({ message: expect.any(String) })
         );
         expect(serverRes.body).toEqual(
-          expect.objectContaining({ message: "Imcomplete required fields" })
+          expect.objectContaining({ message: "Incomplete required fields" })
         );
       })
       .catch((err) => console.log(err));
@@ -69,19 +69,18 @@ describe("Testing routes and responses for REGISTER", () => {
       .send(data)
       .expect(200)
       .then((serverRes) => {
-        console.log(serverRes.body);
-        expect(serverRes.data).toBeDefined();
-        expect(serverRes.data).toEqual(expect.any(Object));
-        expect(serverRes.data).toEqual(
+        expect(serverRes.body).toBeDefined();
+        expect(serverRes.body).toEqual(expect.any(Object));
+        expect(serverRes.body).toEqual(
           expect.objectContaining({ wish: expect.any(Array) })
         );
-        expect(serverRes.data).toEqual(
+        expect(serverRes.body).toEqual(
           expect.objectContaining({ watched: expect.any(Array) })
         );
-        expect(serverRes.data).toEqual(
+        expect(serverRes.body).toEqual(
           expect.objectContaining({ _id: expect.any(String) })
         );
-        expect(serverRes.data.password.length).toBeGreaterThan(10);
+        expect(serverRes.body.password.length).toBeGreaterThan(10);
       })
       .catch((err) => console.log(err));
   });
