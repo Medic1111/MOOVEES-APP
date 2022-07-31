@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/listen.js",
     "build": "cd client && npm install && npm run build",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --detectOpenHandles"
   },
   "engines": {
     "node": "18.2.0"
