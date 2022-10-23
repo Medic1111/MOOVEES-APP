@@ -1,4 +1,5 @@
 # MOOVEES-APP
+> Simplified Client-Only Version MVP ready in TypeScript [here](https://moovees-app-typescript-client.netlify.app/)
 
 [Live App Here](https://moovees-app.herokuapp.com/)
 
